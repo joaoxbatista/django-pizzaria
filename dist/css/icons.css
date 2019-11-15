@@ -1,0 +1,43 @@
+.nav {
+    padding: 10px;
+    background: rgb(39, 146, 246);
+    display: flex;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.nav .btn {
+    border-radius: 0px;
+    margin-right: 2px;
+    flex: auto;
+    border-radius: 2px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    display:block;
+    margin: 0 auto;
+}
+
+.icon-ingredients {
+    background: url(../icons/groceries.svg);
+}
+
+.icon-user {
+    background: url(../icons/boy.svg);
+}
+
+.icon-pizza {
+    background: url(../icons/pizza.svg);
+}
+
+.icon-order {
+    background: url(../icons/checklist.svg);
+    background-size: 20px 20px;
+}
+
+.icon-logout {
+    background: url(../icons/logout.svg);
+    background-size: 20px 20px;
+}

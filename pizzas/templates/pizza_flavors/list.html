@@ -1,0 +1,70 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white">
+                    <div class="card-header">
+                        <h4>Listagem de Sabores de Pizza</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{% url 'pizza_flavors.create'%}" class="btn btn-success">
+                                    <i class="fa fa-plus"></i>
+                                    Adicionar Sabor
+                                </a>
+                            </div>
+
+                            <div class="col-md-12 p-4 mt-4 bg-white text-dark">
+                                <table id="person-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th width="150px">Nome</th>
+                                            <th>Preço P</th>
+                                            <th>Preço M</th>
+                                            <th>Preço G</th>
+                                            <th>Ingredientes</th>
+                                            <td>Ações</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        {% for item in items %}
+                                            <tr>
+                                                <td>{{ item.id }}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td>{{ item.price_p }}</td>
+                                                <td>{{ item.price_m }}</td>
+                                                <td>{{ item.price_g }}</td>
+                                                
+                                                <td>
+                                                    {% for ingredient in item.ingredients.all %}
+                                                        <li>{{ ingredient.name }}</li>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>    
+                                                    <a href="{% url 'pizza_flavors.view' item.id%}" class="btn btn-info">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('#person-table').DataTable();
+        } );
+    </script>
+{% endblock%}

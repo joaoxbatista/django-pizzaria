@@ -1,0 +1,95 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <h4>Novo pedido</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{% url 'ingredients.list'%}" class="btn btn-success">
+                                <i class="fa fa-arrow-left"></i>
+                                Voltar
+                            </a>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="card text-dark" >
+                                            <div class="card-header">
+                                                <h5>Adicione os sabores da pizza</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <select name="flavor_selected" id="" class="form-control">
+                                                        {% for flavor in flavors %}
+                                                            <option value="{{ flavor.id }}"> {{ flavor }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-success">Adicionar a pizza</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="card text-dark" >
+                                        <div class="card-header">
+                                            <h5>Pizza selecionada</h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <h6>Sabores selecionados</h6>
+                                            <form method="post" action="{% url 'orders.add.pizza' %}">
+                                                {% csrf_token %}
+                                                {% for key, values in request.session.flavors_selected.items %}
+                                                    <p class="badge badge-pill badge-primary">
+                                                        {{ values }}
+                                                        <a href="{% url 'orders.remove.flavor' key %}" class="text-white">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </p>
+                                                {% endfor %}
+                                                <div class="form-group">
+                                                    <label class="form-label">Tamanho da Pizza</label>
+                                                    <select name="pizza_size" id="" class="form-control">
+                                                        <option value="p"> Pequena</option>
+                                                        <option value="m"> Média</option>
+                                                        <option value="g"> Grande</option>
+                                                    </select>
+                                                </div>
+
+                                                <button class="btn btn-success" type="submit">Adicionar ao pedido</button>
+                                                <a href="{% url 'orders.clear.pizza'    %}" class="btn btn-danger">Limpar</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="row mb-4">
+                                {% if request.session.pizza_list %}
+                                    {% for pizza in request.session.pizza_list %}
+                                        {{ pizza.field.related_query_name }}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+

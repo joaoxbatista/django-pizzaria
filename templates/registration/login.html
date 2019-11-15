@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <h4>Login Usuário</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-12 mt-4">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form|crispy  }}
+                                <button type="submit" class="btn btn-success">Login</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

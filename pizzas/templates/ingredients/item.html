@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'node_modules/font-awesome/css/font-awesome.min.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-4" >
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-dark text-white">
+                            <div class="card-header">
+                                <h4>Visualizar Ingrediente {{ item }}</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <a href="{% url 'ingredients.list'%}" class="btn btn-success">
+                                            <i class="fa fa-arrow-left"></i>
+                                            Voltar
+                                        </a>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12 mt-4">
+
+                                        <h4>Unidade de medida: {{ item.unit_measure }}</h4>
+                                        <h4>Preço: {{ item.price }}</h4>
+                                        <h4>Descrição: </h4>
+                                        <p>{{ item.description }}</p>
+
+                                        <a href="{% url 'ingredients.delete' item.id%}" class="btn btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
